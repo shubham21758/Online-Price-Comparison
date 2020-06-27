@@ -32,9 +32,6 @@ class Scrapper_flipkart:
         self.URL = self.URL + self.create_url(self.searchterm)
         self.response = requests.get(self.URL, headers=headers)
         self.soup = BeautifulSoup(self.response.content, 'lxml')
-        # if self.noitems == 0:
-        #     print('not valid input')
-        #     exit()
 
     def create_url(self, searchterm):
         string_list = searchterm.split(' ')
@@ -45,7 +42,6 @@ class Scrapper_flipkart:
 
     def initialize(self):
         if self.response.status_code == 200:
-            # print('Scraping initiated for search: ', self.searchterm)
             return self.check_diplay_type()
         else:
             print('Request timed out, Poor connection.Try again.')
@@ -60,7 +56,7 @@ class Scrapper_flipkart:
     def get_product_info_box(self):
         try:
             for var in self.soup.find_all("div", class_='bhgxx2 col-12-12'):
-                if len(self.name_list) == 3:
+                if len(self.name_list) == 1:
                     break
                 if var.find('div',class_='niH0FQ _36Fcw_') is not None :
                     rating = var.find('span',class_='_38sUEc').get_text()
@@ -73,11 +69,13 @@ class Scrapper_flipkart:
                 else:
                     name = var.find('a', {'class': self.BOX_PRODUCT_CLASS_DICT['name']}).get_text()
                     self.name_list.append(name)
-                if var.find('div', {'class': self.BOX_PRODUCT_CLASS_DICT['specs']}) is None:
-                    pass
-                else:
+
+                if var.find('div', {'class': self.BOX_PRODUCT_CLASS_DICT['specs']}) is not None:
                     specs = var.find('div', {'class': self.BOX_PRODUCT_CLASS_DICT['specs']}).get_text()
                     self.specs_list.append(specs)
+                else:
+                    self.specs_list.append("Nothing")
+
                 if var.find("div", class_=self.BOX_PRODUCT_CLASS_DICT['price']) is None:
                     pass
                 else:
@@ -102,6 +100,7 @@ class Scrapper_flipkart:
                 # else:
                 #     img = var.find("img", class_='_3BTv9X').get_text()
                 #     print(img)
+
         except :
             pass
             #print('Class name is different')
@@ -109,7 +108,7 @@ class Scrapper_flipkart:
     def get_product_info(self):
         try:
             for var in self.soup.find_all("div", class_='bhgxx2 col-12-12'):
-                if len(self.name_list) == 3:
+                if len(self.name_list) == 1:
                     break
                 if var.find('div', {'class': self.PRODUCT_CLASS_DICT['rating']}) is not None:
                     rating = var.find('span', {'class': '_38sUEc'}).get_text()
@@ -174,6 +173,7 @@ class Scrapper_flipkart:
         # for image in self.soup.findAll('img',class_='_1Nyybr'):
         #     img = image.get('src')
         #     # self.img_url.append(img)
+        #     print("*********************************   ",img)
 
     def notFound(self):
         pass
