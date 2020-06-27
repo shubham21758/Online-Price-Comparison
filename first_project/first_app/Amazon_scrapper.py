@@ -1,12 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import random
-#quantity = 6   ## Replace it   ==========================
-name_list = list()
-price_list = list()
-rating_list = list()
-itemurl = list()
-offer_list = list()
+
 headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36'}
 
 def GET_UA():
@@ -64,11 +59,18 @@ class Scrapper_amazon():
                 price = d.find('span', attrs={'class': 'a-price-whole'}).get_text()
                 self.price_list.append(price)
 
-            if d.find('span', attrs={'class': 'a-size-base'}) is None:
-                pass
+            if d.find('div', attrs={'class': 'a-icon-row a-spacing-small a-padding-none'}) is None:
+                self.rating_list.append("Nothing")
             else:
-                rating = d.find('span', attrs={'class': 'a-size-base'}).get_text()
+                rating = d.find('div', attrs={'class': 'a-size-medium a-color-base a-text-beside-button a-text-bold'}).get_text()
                 self.rating_list.append(rating)
+
+            if d.find('span', attrs={'class': 'a-text-bold'}) is None:
+                pass
+                # self.specs_list.append("Nothing")
+            else:
+                specs = d.find('span', attrs={'class': 'a-text-bold'}).get_text()
+                self.specs_list.append(specs)
 
             if d.find('a', attrs={'class': 'a-link-normal a-text-normal'}) is None:
                 pass
@@ -78,8 +80,10 @@ class Scrapper_amazon():
                 self.item_url.append(url)
 
         for image in self.soup.findAll('img',class_='s-image'):
+            if len(self.img_url) > 1 :
+                break
             img = image.get('src')
             self.img_url.append(img)
 
-        if len(self.img_url) !=0:
-            self.img_url.pop(0)
+        # if len(self.img_url) !=0:
+        #     self.img_url.pop(0)

@@ -15,13 +15,14 @@ def Amazon(item_search,r):
     obj.initialize()
     objs1 = [Item() for i in range(0,1)]
 
-    for (a,b,c,d,e,f,g) in zip(objs1,obj.name_list,obj.rating_list,obj.item_url,obj.img_url,obj.price_list,obj.img_url):
+    for (a,b,c,d,e,f,g,h) in zip(objs1,obj.name_list,obj.rating_list,obj.item_url,obj.img_url,obj.price_list,obj.img_url,obj.specs_list):
         a.name = b
         a.rating = c
         a.url = d
         a.img_url = e
         a.price = f
         a.img_url = g
+        a.specs = h
     r[0] = objs1
 
 def Flipkart(item_search,r1):
