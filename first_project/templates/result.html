@@ -27,24 +27,67 @@
       Online Price Comparison
     </a>
   </nav>
-
   </head>
+
   <body>
-    <div class="container mt-xl-4 pt-1 w-100" >
+    <div class="container mt-xl-4" >
       <div class="section_subtitle text-center "><h3><strong>Best Matching Results</strong></h3></div>
     </div>
-    <div class="container mt-xl-4 pt-5 w-50" >
+
+    {% for a in item2 %}
+    {% if a.specs %}
+    <div class="container " >
       <div class="row" >
         <div class="col" >
-          <div class="d-flex justify-content-around" >
+          <div class="d-flex justify-content-center border border-light p-5 mt-5" >
           		{% for i in item1 %}
-                <img src=" {{i.img_url}}" alt="">
+                <img  src=" {{i.img_url}}" alt="">
+              {% endfor %}
+          </div>
+        </div>
+        <div class="col" >
+            {% for i in item2 %}
+            {% if i.specs %}
+            <div class="destination_price">Specification list</div>
+            <div class="destination_list">
+              <ul>
+                {% for x in i.specs %}
+                  <li>{{x}}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+      </div>
+    </div>
+
+    {% else %}
+    <div class="container " >
+      <div class="row" >
+        <div class="col" >
+          <div class="d-flex justify-content-center border border-light p-5 mt-5" >
+              {% for i in item1 %}
+                <img  src=" {{i.img_url}}" alt="">
               {% endfor %}
           </div>
         </div>
       </div>
     </div>
+    {% endif %}
 
+    {% if i.specs %}
+    <div class="destination_price">Specification list</div>
+    <div class="destination_list">
+      <ul>
+        {% for x in i.specs %}
+          <li>{{x}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% endfor %}
 
 
 
@@ -69,6 +112,7 @@
 
 							<div class="destination_subtitle"><p>Reviews {{i.rating}}</p></div>
 					<div class="destination_subtitle"><p>Get it by <strong> {{i.specs}} </strong> </p></div>
+
 						<div class="destination_price">₹ {{i.price}}</div>
 							<!--
 								{% if i.specs %}
@@ -106,7 +150,8 @@
 								<div class="destination_subtitle "><p>{{i.rating}}</p></div>
 								<div class="destination_subtitle  "><p>Offer <strong>{{ i.offer }}</strong></p></div>
 								<div class="destination_price  ">{{i.price}}</div>
-								{% if i.specs %}
+								<!-- {% if i.specs %} -->
+                <!--
 								<div class="destination_price">Specification</div>
 								<div class="destination_list">
 									<ul>
@@ -116,11 +161,11 @@
 									</ul>
 								</div>
 								{% endif %}
-
+              -->
 							</div>
-						{% endfor %}
 
 					</div>
+          {% endfor %}
 
 				</div>
 </div>
