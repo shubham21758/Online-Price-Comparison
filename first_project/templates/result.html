@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' %}" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/destinations.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/destinations_responsive.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
@@ -98,45 +97,30 @@
 				<div class="col-sm">
 					<div class="text-center "><a href="https://www.amazon.in/" ><h2>Amazon</h2></div>
 						{% for i in item1 %}
-
 							<div class="d-flex justify-content-center">
-					<!--			<img src=" {{i.img_url}}" alt="">  -->
-
-				<!--				{% if item.offer %}
-								<div class="spec_offer text-center"><a href="{{objs.item.url}}">Special Offer</a></div>
+				<!--
+                {% if item.offer %}
+								  <div class="spec_offer text-center"><a href="{{objs.item.url}}">Special Offer</a></div>
 								{% endif %}
-						-->
+				-->
 							</div>
-							<div class="destination_content ">
-								<div class="destination_title"><a href="{{i.url}}">{{i.name}}</a></div>  <!--   -->
+							     <div class="destination_content ">
+							     <div class="destination_title"><a href="{{i.url}}">{{i.name}}</a></div>  <!--   -->
 
-							<div class="destination_subtitle"><p>Reviews {{i.rating}}</p></div>
-					<div class="destination_subtitle"><p>Get it by <strong> {{i.specs}} </strong> </p></div>
+							     <div class="destination_subtitle"><p>Reviews {{i.rating}}</p></div>
+					         <div class="destination_subtitle"><p>Get it by <strong> {{i.specs}} </strong> </p></div>
 
-						<div class="destination_price">₹ {{i.price}}</div>
-							<!--
-								{% if i.specs %}
-								<div class="destination_price">Specification</div>
-								<div class="destination_list">
-									<ul>
-										{% for x in i.specs %}
-					    				<li>{{x}}</li>
-					  				{% endfor %}
-									</ul>
-								</div>
-								{% endif %}
-							-->
+						       <div class="destination_price">₹ {{i.price}}</div>
 							</div>
 						{% endfor %}
 					</div>
+          
 						<!-- Flipkart -->
 				<div class="col-sm">
 						<div class="text-center"><a href="https://www.flipkart.com/"><h2>Flipkart</h2></div>
 						{% for i in item2 %}
 							<div class="d-flex justify-content-center ">
-
 							<div class="d-flex justify-content-center">
-						<!--	<img src="{% static 'iphone_7.jpg' %}" alt=""> -->
 						 	<img src=" {{i.img_url}} " alt="">
 						<!--
 								{% if item.offer %}
@@ -150,18 +134,6 @@
 								<div class="destination_subtitle "><p>{{i.rating}}</p></div>
 								<div class="destination_subtitle  "><p>Offer <strong>{{ i.offer }}</strong></p></div>
 								<div class="destination_price  ">{{i.price}}</div>
-								<!-- {% if i.specs %} -->
-                <!--
-								<div class="destination_price">Specification</div>
-								<div class="destination_list">
-									<ul>
-										{% for x in i.specs %}
-											<li>{{x}}</li>
-										{% endfor %}
-									</ul>
-								</div>
-								{% endif %}
-              -->
 							</div>
 
 					</div>
@@ -172,10 +144,11 @@
 
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS
     <script src="{% static 'https://code.jquery.com/jquery-3.2.1.slim.minjs' %}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.minjs' %}" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.minjs' %}" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="{% static 'js/destinations.js' %}"></script>
+    -->
   </body>
 </html>

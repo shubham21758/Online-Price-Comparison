@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 
-# headers = {'User-Agent': 'chrome'}
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
 class Scrapper_flipkart:
@@ -21,7 +20,6 @@ class Scrapper_flipkart:
                               'price': '_1vC4OE', }
 
     def __init__(self, searchterm):
-        # self.quantity = quantity   ## Replace it   ==========================
         self.name_list = list()
         self.specs_list = list()
         self.price_list = list()
@@ -89,17 +87,11 @@ class Scrapper_flipkart:
                     self.item_url.append(str(itemlink))
 
                 if var.find('div', class_='VGWI6T') is None:
-                    # self.offer_list.append("No offer")
                     pass
                 else:
                     offer = var.find('div',  class_='VGWI6T').get_text()
                     self.offer_list.append(offer)
-                #=================================================================
-                # if var.find("img", class_='_3BTv9X') is None:
-                #     pass
-                # else:
-                #     img = var.find("img", class_='_3BTv9X').get_text()
-                #     print(img)
+
 
         except :
             pass
@@ -149,31 +141,9 @@ class Scrapper_flipkart:
                 else:
                     pass
 
-                # print(self.offer_list)   _1Nyybr  _30XEf0
-                #=================================================================
-                # if var.find("img", class_='_1Nyybr  _30XEf0') is None:
-                #     pass
-                # else:
-                #     img = var.find("img", class_=' _1Nyybr  _30XEf0').get('src')
-                #     print(img)
-                # if var.find("img", class_=' _1Nyybr') is None:
-                #     pass
-                # else:
-                #     img = var.find("img", class_=' _1Nyybr').get('src')
-                #     print(img)
-                # if var.find("img", class_='_3BTv9X') is None:
-                #     pass
-                # else:
-                #     img = var.find("img", class_='_3BTv9X').get('src')
-
-
         except :
             pass
             #print('Class name is different')
-        # for image in self.soup.findAll('img',class_='_1Nyybr'):
-        #     img = image.get('src')
-        #     # self.img_url.append(img)
-        #     print("*********************************   ",img)
 
     def notFound(self):
         pass

@@ -3,9 +3,8 @@ from django.http import HttpResponse
 from .models import Item
 from .flipkart_root import Scrapper_flipkart
 from .Amazon_scrapper import Scrapper_amazon
-import multiprocessing
+import threading
 import time
-# Create your views here
 
 def index(request):
     return render(request,"index.html")
@@ -44,12 +43,10 @@ def result(request):
     item_search = request.GET["search_input"]
     #quantity = int(request.GET["quantity"])
 
-    manager = multiprocessing.Manager()
-    r = manager.dict()
-    r1 = manager.dict()
-
-    p1 = multiprocessing.Process(target=Amazon,args=(item_search,r))
-    p2 = multiprocessing.Process(target=Flipkart, args=(item_search,r1))
+    r = {}
+    r1 = {}
+    p1 = threading.Thread(target=Amazon,args=(item_search,r))
+    p2 = threading.Thread(target=Flipkart, args=(item_search,r1))
 
     p1.start()
     p2.start()
@@ -57,10 +54,13 @@ def result(request):
     p1.join()
     p2.join()
 
-    O1 = r.values()[0]
-    O2 = r1.values()[0]
+    O1 = r[0]
+    O2 = r1[0]
 
     finish = time.time()
-
-    print(f'*  **    ****    ***    Finished in {round(finish - start)} seconds')
+    print()
+    print()
+    print(f'            Finished in {round(finish - start)} seconds'           )
+    print()
+    print()
     return render(request,"result.html",{'item1':O1,'item2':O2})
