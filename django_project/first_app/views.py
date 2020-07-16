@@ -52,8 +52,6 @@ def result(request):
 
     p1.join()
     p2.join()
-    print(len(r))
-    print(len(r1))
     O1 = r[0]
     O2 = r1[0]
     r.clear()
