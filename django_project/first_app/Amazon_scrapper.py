@@ -47,40 +47,26 @@ class Scrapper_amazon():
     def initialize(self):
         for d in self.soup.findAll('div', attrs={
             'class': 'sg-col-4-of-12 sg-col-8-of-16 sg-col-16-of-24 sg-col-12-of-20 sg-col-24-of-32 sg-col sg-col-28-of-36 sg-col-20-of-28'}):
-            if len(self.name_list) == 1:
-                break
+            # if len(self.name_list) == 1:
+            #     break
+            if d.find("span",class_="a-size-mini a-color-base") is not None:
+                text = d.find("span",class_="a-size-mini a-color-base").get_text()
+                continue
+                print(text)
+            else:
+                if len(self.name_list) == 1:
+                    break
             if d.find('span', attrs={'class': 'a-size-medium a-color-base a-text-normal'}) is  None:
                 pass
             else:
                 name = d.find('span', attrs={'class': 'a-size-medium a-color-base a-text-normal'}).get_text()
                 self.name_list.append(name)
-                # a = self.searchterm.lower().replace("("," ").replace(")"," ").split()
-                # print(a)
-                # b = name.lower().split()
-                # for i in b:
-                #     if i not in a:
-                #         break
-                # else:
-                #     self.name_list[0] = "Item not found !"
-                #     self.price_list.append(" ")
-                #     self.rating_list.append(" ")
-                #     self.specs_list.append(" ")
-                #     self.item_url.append(" ")
-                #     break
 
-                # if  :
-                #     self.name_list.append(name)
-                # else:
-                #     self.name_list.append("Item not found !")
-                #     self.price_list.append(" ")
-                #     self.rating_list.append(" ")
-                #     self.specs_list.append(" ")
-                #     self.item_url.append(" ")
-                #     break
-
-            if d.find('span', attrs={'class': 'a-price-whole'}) is not None:
+            if d.find('span', attrs={'class': 'a-price-whole'}) is None:
+                self.price_list.append("not found")
+            else:
                 price = d.find('span', attrs={'class': 'a-price-whole'}).get_text()
-                self.price_list.append(price)
+                self.price_list.append("₹ "+price)
 
             if d.find('span', attrs={'class': 'a-size-base'}) is None:
                 self.rating_list.append("not found")
@@ -102,11 +88,13 @@ class Scrapper_amazon():
                 url = "https://www.amazon.in"+url
                 self.item_url.append(url)
 
+
         for image in self.soup.findAll('img',class_='s-image'):
             # if len(self.img_url) ==  1 or "Not found" in self.name_list[0] :
             #     self.img_url.append(" ")
             #     break
             if len(self.img_url) ==  1:
                 break
+
             img = image.get('src')
             self.img_url.append(img)

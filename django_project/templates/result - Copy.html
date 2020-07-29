@@ -8,6 +8,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+-->
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" type="text/css" href="{% static 'styles/destinations.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'styles/destinations_responsive.css' %}">
@@ -32,7 +35,7 @@
   </nav>
   </head>
 
-<body>
+  <body>
     <div class="container mt-xl-4" >
       <div class="section_subtitle text-center "><h3><strong>Best Matching Results</strong></h3></div>
     </div>
@@ -94,108 +97,87 @@
 
 
 
-
+		<!-- Amazon -->
 	<div class="destinations" id="destinations">
 		<div class="container ">
 			<div class="row">
-        {% if item1 %}
+				<div class="col-sm">
+					<div class="text-center "><a href="https://www.amazon.in/" ><h2>Amazon</h2></div>
+						{% for i in item1 %}
+							<div class="d-flex justify-content-center">
+				<!--
+                {% if item.offer %}
+								  <div class="spec_offer text-center"><a href="{{objs.item.url}}">Special Offer</a></div>
+								{% endif %}
+				-->
+							</div>
+							     <div class="destination_content ">
+							     <div class="destination_title"><a href="{{i.url}}">{{i.name}}</a></div>  <!--   -->
 
-        <hr width="1200px;" color="black" size="120">
+							     <div class="destination_subtitle"><p>Reviews {{i.rating}}</p></div>
+					         <div class="destination_subtitle"><p>Get it by <strong> {{i.specs}} </strong> </p></div>
 
-        <!-- Amazon -->
-				<div class="col-10">
-					<div class="text-left "> <a href="https://www.amazon.in/" > <h2>Amazon</h2></div>
-					{% for i in item1 %}
-				<!--<div class="d-flex justify-content-center">
-	                	{% if item.offer %}
-							<div class="spec_offer text-center"><a href="{{objs.item.url}}">Special Offer</a></div>
-						{% endif %}
-					</div>-->
+						       <div class="destination_price">₹ {{i.price}}</div>
+							</div>
+						{% endfor %}
+					</div>
+
+						<!-- Flipkart -->
+				<div class="col-sm">
+						<div class="text-center"><a href="https://www.flipkart.com/"><h2>Flipkart</h2></div>
+						{% for i in item2 %}
+							<div class="d-flex justify-content-center ">
+							<div class="d-flex justify-content-center">
+						<!--
+								{% if item.offer %}
+								<div class="spec_offer text-center"><a href="{{objs.item.url}}">Special Offer</a></div>
+								{% endif %}
+						-->
+							</div>
+
+							<div class="destination_content">
+								<div class="destination_title "><a href=" {{i.url}} ">{{i.name}}</a></div>
+								<div class="destination_subtitle "><p>{{i.rating}}</p></div>
+								<div class="destination_subtitle  "><p>Offer <strong>{{ i.offer }}</strong></p></div>
+								<div class="destination_price  "> {{i.price}}</div>
+							</div>
+
+					</div>
+          {% endfor %}
+
+				</div>
+
+
+
+        <!-- Paytm -->
+        <div class="col-sm">
+        <div class="text-center"><a href="https://paytmmall.com/"><h2>Paytm Mall</h2></div>
+        {% for i in item3 %}
+          <div class="d-flex justify-content-center ">
+          <div class="d-flex justify-content-center">
+        <!--
+            {% if item.offer %}
+            <div class="spec_offer text-center"><a href="{{objs.item.url}}">Special Offer</a></div>
+            {% endif %}
+        -->
+          </div>
 
           <div class="destination_content">
             <div class="destination_title "><a href=" {{i.url}} ">{{i.name}}</a></div>
-            <div class="destination_subtitle section_subtitle "><p> {{i.rating}} Reviews</p></div>
+            <div class="destination_price  ">₹ {{i.price}}</div>
           </div>
-        </div>
-
-        <div class="col-2">
-					<div class="destination_content ">
-            <br><br><br><br>
-
-					  <div class="destination_subtitle section_subtitle text-center"><p>Get it by <strong> {{i.specs}} </strong> </p></div>
-						<div class="destination_price section_subtitle text-center">{{i.price}}</div>
-					</div>
-        </div>
-
-					{% endfor %}
-        <div class="w-100"></div>
-        <br><br><br>
-        <hr width="1200px;" color="black" size="120">
-        {% endif %}
-
-        {% if item2 %}
-						<!-- Flipkart -->
-				<div class="col-10">
-					<div class="text-left"><a href="https://www.flipkart.com/"><h2>Flipkart</h2></div>
-					{% for i in item2 %}
-				<!--<div class="d-flex justify-content-center">
-						{% if item.offer %}
-							<div class="spec_offer text-center"><a href="{{objs.item.url}}">Special Offer</a></div>
-						{% endif %}
-					</div>-->
-
-          <div class="destination_content">
-						<div class="destination_title "><a href=" {{i.url}} ">{{i.name}}</a></div>
-            <div class="destination_subtitle section_subtitle "><p> {{i.rating}}</p></div>
-
-          </div>
-        </div>
-
-          <div class="col-2">
-            <div class="destination_content">
-              <br><br><br><br>
-              <div class="destination_price section_subtitle text-center "> {{i.price}}</div>
-            </div>
-          </div>
-         {% endfor %}
-
-            <div class="w-100"></div>
-            <br><br><br>
-            <hr width="1200px;" color="black" size="120">
-            {% endif %}
-
-            {% if item3 %}
-
-		        <!-- Paytm -->
-		        <div class="col-10">
-		        	<div class="text-left"><a href="https://paytmmall.com/"><h2>Paytm Mall</h2></div>
-		        	{% for i in item3 %}
-		     	<!--<div class="d-flex justify-content-center">
-		            	{% if item.offer %}
-				            <div class="spec_offer text-center"><a href="{{objs.item.url}}">Special Offer</a></div>
-				        {% endif %}
-		          	</div> -->
-                <div class="destination_content">
-                  <div class="destination_title "><a href=" {{i.url}} ">{{i.name}}</a></div>
-                </div>
-
-              </div>
-                <div class="col-2">
-		          	<div class="destination_content">
-                  <br><br><br><br>
-		            	<div class="destination_price section_subtitle text-center ">{{i.price}}</div>
-		          	</div>
-                </div>
-		        	{% endfor %}
-              <br><br><br>
-              <br><br><br>
-              <br><br>
-              <hr width="1200px;" color="black" size="120">
-              {% endif %}
 
         </div>
-	</div>
+        {% endfor %}
+        </div>
+</div>
 
-
-</body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS
+    <script src="{% static 'https://code.jquery.com/jquery-3.2.1.slim.minjs' %}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.minjs' %}" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="{% static 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.minjs' %}" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{% static 'js/destinations.js' %}"></script>
+    -->
+  </body>
 </html>
