@@ -1,7 +1,7 @@
 # Online-Price-Comparison
 Online Price Comparison website, which can compare prices from Amazon and flipkart through web scraping using beautifulsoup.
 
-Python modules used:
+Python framework and modules used:
 
   1.Django
   2.requests
