@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 
-headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36'}
+headers = {'User-agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36'}
 
 def GET_UA():
     uastrings = [
@@ -46,22 +46,21 @@ class Scrapper_amazon():
 
     def initialize(self):
         for d in self.soup.findAll('div', attrs={
-            'class': 'sg-col-4-of-12 sg-col-8-of-16 sg-col-16-of-24 sg-col-12-of-20 sg-col-24-of-32 sg-col sg-col-28-of-36 sg-col-20-of-28'}):
+            'class': 's-result-item s-asin sg-col-0-of-12 sg-col-16-of-20 sg-col sg-col-12-of-16'}):
             # if len(self.name_list) == 1:
             #     break
-            if d.find("span",class_="a-size-mini a-color-base") is not None:
-                text = d.find("span",class_="a-size-mini a-color-base").get_text()
-                continue
-                print(text)
-            else:
-                if len(self.name_list) == 1:
-                    break
+            if d.find("span",class_="a-size-medium a-color-base a-text-normal") is not None:
+                if len(self.name_list) > 0:
+                    pass
+                else:
+                    text = d.find("span",class_="a-size-medium a-color-base a-text-normal").get_text()
+                    self.name_list.append(text)
+
             if d.find('span', attrs={'class': 'a-size-medium a-color-base a-text-normal'}) is  None:
                 pass
             else:
                 name = d.find('span', attrs={'class': 'a-size-medium a-color-base a-text-normal'}).get_text()
                 self.name_list.append(name)
-
             if d.find('span', attrs={'class': 'a-price-whole'}) is None:
                 self.price_list.append("not found")
             else:

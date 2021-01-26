@@ -59,45 +59,46 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-		<script>
-		  function myFunction() {
-		    var x = document.getElementById("myProgress");
-		    var str = '<div class="progress" style="height: 5px" id="myBar">'+
-			  '<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"'+
-			  'aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:'+ 10% +'"> </div> </div>' ;
-		  	x.innerHTML = str
-		  }
-		</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
-		<script>
-			var i = 0;
-			function move() {
-			  if (i == 0) {
-			    i = 1;
-			    var elem = document.getElementById("myBar");
-			    var width = 5;
-			    var id = setInterval(frame, 50);
-			    function frame() {
-			      if (width >= 100) {
-			        clearInterval(id);
-			        i = 0;
-			      } else {
-			        width++;
-			        elem.style.width = width + "%";
-			        elem.innerHTML = width  + "%";
-			      }
-			    }
-			  }
-			}
-		</script>
-		<script>
-		function bar()
-		{
-			myFunction();
-			move();
+	<script>
+		function myFunction() {
+		var x = document.getElementById("myProgress");
+		var str = '<div class="progress" style="height: 5px" id="myBar">'+
+			'<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"'+
+			'aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:'+ 10% +'"> </div> </div>' ;
+		x.innerHTML = str
 		}
-		</script>
+	</script>
+
+	<script>
+		var i = 0;
+		function move() {
+			if (i == 0) {
+			i = 1;
+			var elem = document.getElementById("myBar");
+			var width = 5;
+			var id = setInterval(frame, 50);
+			function frame() {
+				if (width >= 100) {
+				clearInterval(id);
+				i = 0;
+				} else {
+				width++;
+				elem.style.width = width + "%";
+				elem.innerHTML = width  + "%";
+				}
+			}
+			}
+		}
+	</script>
+	<script>
+	function bar()
+	{
+		myFunction();
+		move();
+	}
+	</script>
  </head>
 <body>
 

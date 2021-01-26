@@ -19,6 +19,7 @@ def Amazon(item_search,amazon_obj):
         a.rating = c
         a.url = d
         a.img_url = e
+        print(a.img_url)
         a.price = f
         a.specs = g
     amazon_obj[0] = objs1
@@ -64,6 +65,7 @@ def result(request):
     amazon_obj = {}
     flipkart_obj = {}
     paytm_obj = {}
+
     t1 = threading.Thread(target=Amazon,args=(item_search,amazon_obj))
     t2 = threading.Thread(target=Flipkart, args=(item_search,flipkart_obj))
     t3 = threading.Thread(target=Paytm, args=(item_search,paytm_obj,category))

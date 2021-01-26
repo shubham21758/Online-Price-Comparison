@@ -4,6 +4,7 @@ import requests
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
 class Scrapper_flipkart:
+
     URL = 'https://www.flipkart.com/search?q='
     PRODUCT_CLASS_DICT = {'name': '_3wU53n',
                           'rating': 'niH0FQ',
@@ -45,11 +46,13 @@ class Scrapper_flipkart:
             print('Request timed out, Poor connection.Try again.')
 
     def check_diplay_type(self):
-        for var in self.soup.find_all("div", class_='bhgxx2 col-12-12'):
-            if var.find('a', {'class': '_2cLu-l'}) is not None:
-                return self.get_product_info_box()
-            elif var.find('div', {'class': self.PRODUCT_CLASS_DICT['name']}) is not None:
-                return self.get_product_info()
+        return self.get_product_info()
+        #
+        # for var in self.soup.find_all("div", class_='bhgxx2 col-12-12'):
+        #     if var.find('a', {'class': '_2cLu-l'}) is not None:
+        #         return self.get_product_info_box()
+        #     elif var.find('div', {'div', class_ ='_2pi5LC col-12-12') is not None:
+        #         return self.get_product_info()
 
     def get_product_info_box(self):
         try:
@@ -99,45 +102,45 @@ class Scrapper_flipkart:
 
     def get_product_info(self):
         try:
-            for var in self.soup.find_all("div", class_='bhgxx2 col-12-12'):
+            for var in self.soup.find_all("div", class_='_2pi5LC col-12-12'):
                 if len(self.name_list) == 1:
                     break
-                if var.find('div', {'class': self.PRODUCT_CLASS_DICT['rating']}) is not None:
-                    rating = var.find('span', {'class': '_38sUEc'}).get_text()
+                if var.find('div', class_='gUuXy-') is not None:
+                    rating = var.find('span', class_='_2_R_DZ').get_text()
                     self.rating_list.append(rating)
                 else:
                     pass
 
-                if var.find('div', {'class': self.PRODUCT_CLASS_DICT['name']}) is None:
+                if var.find('div', class_='_3pLy-c row') is None:
                     pass
                 else:
-                    name = var.find('div', {'class': self.PRODUCT_CLASS_DICT['name']}).get_text()
+                    name = var.find('div', class_='_4rR01T').get_text()
                     self.name_list.append(name)
-                if var.find('ul', {'class': self.PRODUCT_CLASS_DICT['specs']}) is None:
+                if var.find('ul', class_='_1xgFaf') is None:
                     pass
                 else:
                     specs = ""
-                    for i in var.find_all('li',class_='tVe95H'):
+                    for i in var.find_all('li',class_='rgWa7D'):
                         specs = specs + i.get_text() +"*"
                     specs = specs.replace("|","")
                     self.specs_list.append(specs)
-                if var.find("div", class_=self.PRODUCT_CLASS_DICT['price']) is None:
+                if var.find("div", class_='_25b18c') is None:
                     pass
                 else:
-                    price = var.find("div", class_=self.PRODUCT_CLASS_DICT['price']).get_text()#[1:].replace(',', '')
+                    price = var.find("div", class_='_30jeq3 _1_WHN1').get_text()#[1:].replace(',', '')
                     self.price_list.append(price)
-                if var.find('a',class_='_31qSD5') is None:
+                if var.find('a',class_='_1fQZEK') is None:
                     pass
                 else:
-                    itemlink = var.find('a',class_='_31qSD5').get('href')
+                    itemlink = var.find('a',class_='_1fQZEK').get('href')
                     itemlink = "https://www.flipkart.com"+itemlink
                     self.item_url.append(str(itemlink))
-                if var.find('div', class_='_2nE8_R') is not None:
-                    offer = var.find('div', class_='_2nE8_R').get_text()
+                if var.find('div', class_='_2ZdXDB') is not None:
+                    offer = var.find('div', class_='_2ZdXDB').get_text()
                     self.offer_list.append(offer)
-                elif var.find('div', class_='VGWI6T') is not None:
-                    offer = var.find('div',class_='VGWI6T').get_text()
-                    self.offer_list.append(offer)
+                # elif var.find('div', class_='VGWI6T') is not None:
+                #     offer = var.find('div',class_='VGWI6T').get_text()
+                #     self.offer_list.append(offer)
                 else:
                     pass
 
