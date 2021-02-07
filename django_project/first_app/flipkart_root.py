@@ -3,6 +3,20 @@ import requests
 
 headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
 
+def GET_UA():
+    uastrings = [
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", \
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36", \
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10) AppleWebKit/600.1.25 (KHTML, like Gecko) Version/8.0 Safari/600.1.25", \
+        "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0", \
+        "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", \
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36", \
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/600.1.17 (KHTML, like Gecko) Version/7.1 Safari/537.85.10", \
+        "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko", \
+        "Mozilla/5.0 (Windows NT 6.3; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0", \
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+        "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.104 Safari/537.36" \
+        ]
 class Scrapper_flipkart:
 
     URL = 'https://www.flipkart.com/search?q='
@@ -29,7 +43,8 @@ class Scrapper_flipkart:
         self.offer_list = list()
         self.searchterm = searchterm
         self.URL = self.URL + self.create_url(self.searchterm)
-        self.response = requests.get(self.URL, headers=headers)
+        self.headers = {'User-Agent': GET_UA()}
+        self.response = requests.get(self.URL, headers=self.headers)
         self.soup = BeautifulSoup(self.response.content, 'lxml')
 
     def create_url(self, searchterm):
@@ -111,11 +126,12 @@ class Scrapper_flipkart:
                 else:
                     pass
 
-                if var.find('div', class_='_3pLy-c row') is None:
+                if var.find('div', class_='col col-7-12') is None:
                     pass
                 else:
                     name = var.find('div', class_='_4rR01T').get_text()
                     self.name_list.append(name)
+
                 if var.find('ul', class_='_1xgFaf') is None:
                     pass
                 else:
